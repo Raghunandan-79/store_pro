@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:store_pro/product_store/views/icecream_view.dart';
+// import 'package:store_pro/product_store/views/icecream_view.dart';
+import 'package:store_pro/product_store/views/search_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -8,7 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: IcecreamView(),
+      body: SearchView(),
 
       bottomNavigationBar: BottomNavigation(),
     );
