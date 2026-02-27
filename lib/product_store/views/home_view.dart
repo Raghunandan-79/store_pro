@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-// import 'package:store_pro/product_store/views/icecream_view.dart';
+import 'package:provider/provider.dart';
+import 'package:store_pro/product_store/model/app_state_model.dart';
+import 'package:store_pro/product_store/views/cart_view.dart';
+import 'package:store_pro/product_store/views/icecream_view.dart';
 import 'package:store_pro/product_store/views/search_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -8,38 +11,48 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SearchView(),
+    final model = Provider.of<AppStateModel>(context);
 
-      bottomNavigationBar: BottomNavigation(),
-    );
-  }
-}
-
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return NavigationBar(
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Ionicons.ice_cream_outline), 
-          label: 'Home'
-        ),
-    
-        NavigationDestination(
-          icon: Icon(Ionicons.search_outline), 
-          label: 'Search'
-        ),
-    
-        NavigationDestination(
-          icon: Icon(Ionicons.cart_outline), 
-          label: 'Cart'
+    return Scaffold(
+      body: SafeArea(
+        child: IndexedStack(
+          index: model.currentIndex,
+          children: const [
+            IcecreamView(),
+            SearchView(),
+            CartView(),
+            Center(
+              child: Text('Search'),
+            ),
+            Center(
+              child: Text('Cart'),
+            )
+          ],
         )
-      ],
+      ),
+
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: model.currentIndex,
+
+        onDestinationSelected: model.changeIndex,
+
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Ionicons.ice_cream_outline),
+            label: 'Home',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Ionicons.search_outline),
+            label: 'Search',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Ionicons.cart_outline), 
+            label: 'Cart'
+          )
+        ],
+      ),
     );
   }
 }
