@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:store_pro/app/constants.dart';
 import 'package:store_pro/product_store/model/app_state_model.dart';
 
 class AppBlocObserver extends BlocObserver {
@@ -36,12 +38,15 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  Constants.prefs = await SharedPreferences.getInstance();
+
   // Add cross-flavor configuration here
 
   runApp(
     ChangeNotifierProvider<AppStateModel>(
       create: (context) => AppStateModel()..loadProducts(),
-      child: await builder()
-    )
+      child: await builder(),
+    ),
   );
 }

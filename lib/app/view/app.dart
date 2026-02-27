@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:store_pro/app/constants.dart';
 import 'package:store_pro/l10n/l10n.dart';
 import 'package:store_pro/product_store/views/home_view.dart';
+import 'package:store_pro/product_store/views/login_view.dart';
 import 'package:store_pro/themes/styles.dart';
 
 class App extends StatelessWidget {
@@ -20,7 +22,9 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const HomeView(),
+      home: Constants.prefs!.getBool('isLoggedIn') == true
+        ? const HomeView() 
+        : const LoginView(),
     );
   }
 }
