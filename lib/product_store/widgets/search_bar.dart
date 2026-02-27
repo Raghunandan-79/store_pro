@@ -20,34 +20,41 @@ class MySearchBar extends StatelessWidget {
           color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(8),
         ),
-      
+
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: [
               const Icon(
                 Icons.search,
+                color: Colors.black,
               ),
 
-              const SizedBox(width: 8,),
-                
+              const SizedBox(
+                width: 8,
+              ),
+
               Expanded(
                 child: TextField(
                   controller: controller,
                   focusNode: focusNode,
-                
+
                   style: Styles.searchText,
-                
+
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.black),
                   ),
                 ),
               ),
-                
+
               IconButton(
                 onPressed: controller.clear,
-                icon: const Icon(Icons.clear),
+                icon: const Icon(
+                  Icons.clear,
+                  color: Colors.black,
+                ),
               ),
             ],
           ),
